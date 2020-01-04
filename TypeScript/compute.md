@@ -40,6 +40,22 @@ function area(shape: Shape): number {
 ```
 
 
+## 构造类型
+
+### 用字面量构造类型
+
+字面量有初始值，用`typeof`，减少重复代码。
+
+``` TypeScript
+const defaultOption = {
+    timeout: 500
+}
+
+type Opt = typeof defaultOption
+
+```
+
+
 ## change log
 
 - 2019/12/29 create document
