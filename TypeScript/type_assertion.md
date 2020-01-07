@@ -189,12 +189,45 @@ const getLength = (something: string | number): number => {
 
 ```
 
-这个地方使用类型断言，是否这好的办法呢？不一定。就这个例子而言，`(something as string)`可以使用`typeof something === string`。更进一步，在有些情况，可以使用`is`。
+这个地方使用类型断言，是否这好的办法呢？不一定。就这个例子而言，`(something as string)`可以使用`typeof something === string`。
+
+
+更进一步，在有些情况，可以使用`is`。
 
 ``` TypeScript
 
 const isString = (s: any): s is string => {
     return typeof s === 'string';
+}
+
+```
+
+或者使用 discriminated union(模拟模式匹配)的技巧。当然，这个办法代码多了，约束也更多。
+
+``` TypeScript
+
+type s1 = {
+    type: 'nunber'
+    value: number
+}
+
+type s2 = {
+    type: 'string'
+    value: string
+}
+
+type s = s1 | s2
+
+function getLength(s: s): number {
+    
+    switch (s.type) {
+        case 'number':
+            return something.toString().length;
+        case 'string':
+            return something.length;
+        default:
+            return 0;
+    }
 }
 
 ```
