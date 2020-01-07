@@ -4,7 +4,7 @@
 
 TS允许程序员覆盖TS类型的推断，然后以程序想要的方式使用，被称为“类型断言”。类型断言是一种很灵活的方式，灵活也同样意味着容易犯错。在有些场景下，类型声明会是更好的方案。
 
-局限性：当`S`类型是`T`类型的子集的时候，或者`T`类型是`S`类型的子集时，`S`能被推断为`T`。所以类型断言，可以提供额外的安全性，而无根据的断言会导致危险。后者建议用`any`。
+局限性：当`S`类型是`T`类型的子集的时候，或者`T`类型是`S`类型的子集时，`S`能被推断为`T`。这个规则表明，类型断言是一个做类型选择的办法，不能做类型转换。类型断言，可以提供额外的安全性，而无根据的断言会导致危险。后者建议用`any`。
 
 绕开这个局限性的技巧，是使用双重断言，见下文。
 
@@ -28,7 +28,7 @@ let foo = <string>bar;</string>;
 
 ### 类型断言的害处
 
-如果不需要收缩类型或者放大类型的范围，请使用类型声明，类型声明能做到更好的类型检查和代码提示。
+如果不需要收缩(narrow down)类型或者放大类型的范围，请使用类型声明，类型声明能做到更好的类型检查和代码提示。
 
 不好的用法示例：
 
@@ -146,6 +146,21 @@ const bar = (() => {}) as () => (Promise<number | string>)
 ```
 #### 没有共同的属性
 
+报错的代码
+
+``` TypeScript
+
+const getLength = (something: string | number): number => {
+        return something.length;
+}
+
+// Error:  Property 'length' does not exist on type 'string | number'. Property 'length' does not exist on type 'number'.
+
+```
+
+加上`length`属性判断，也不能修复报错。
+
+
 ``` TypeScript
 
 const getLength = (something: string | number): number => {
@@ -160,7 +175,29 @@ const getLength = (something: string | number): number => {
 
 ```
 
-尝试修改
+用类型断言修正
+
+``` TypeScript
+
+const getLength = (something: string | number): number => {
+    if((something as string).length){
+        return something.length;
+    } else {
+        return something.toString().length;
+    }
+}
+
+```
+
+这个地方使用类型断言，是否这好的办法呢？不一定。就这个例子而言，`(something as string)`可以使用`typeof something === string`。更进一步，在有些情况，可以使用`is`。
+
+``` TypeScript
+
+const isString = (s: any): s is string => {
+    return typeof s === 'string';
+}
+
+```
 
 
 ## 和类型转换的区别
