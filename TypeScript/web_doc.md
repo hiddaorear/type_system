@@ -1,5 +1,7 @@
 # TS相关文章
 
+- [深入理解TypeScript](https://jkchao.github.io/typescript-book-chinese/)
+
 - [巧用 Typescript (二)](https://zhuanlan.zhihu.com/p/64423022)
 
 - [TypeScript 类型实战 - 从模板函数到消息参数](https://zhuanlan.zhihu.com/p/95955218)
