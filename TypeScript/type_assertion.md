@@ -123,7 +123,9 @@ function handler(event: Event) {
 
 ```
 
-### 和类型和类型断言
+### 和类型(联合类型)和类型断言
+
+#### 没有共同的签名方法
 
 ``` TypeScript
 
@@ -142,6 +144,24 @@ bar().then((data) => {}) // then会被报类型错误
 const bar = (() => {}) as () => (Promise<number | string>)
 
 ```
+#### 没有共同的属性
+
+``` TypeScript
+
+const getLength = (something: string | number): number => {
+    if(something.length){
+        return something.length;
+    } else {
+        return something.toString().length;
+    }
+}
+
+// Error:  Property 'length' does not exist on type 'string | number'. Property 'length' does not exist on type 'number'.
+
+```
+
+尝试修改
+
 
 ## 和类型转换的区别
 
