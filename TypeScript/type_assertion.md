@@ -219,7 +219,7 @@ type s2 = {
 type s = s1 | s2
 
 function getLength(s: s): number {
-    
+
     switch (s.type) {
         case 'number':
             return something.toString().length;
@@ -236,6 +236,10 @@ function getLength(s: s): number {
 ## 和类型转换的区别
 
 类型推断是一种编译的语法，也是为编译器提供如何分析代码的方法。而类型转换通常是运行时的。
+
+## 和声明的区别
+
+特别是用临时类型声明，如`let a = {} : {name: string, id: number};`，这种情况下，与使用`as`的区别是什么？
 
 ## change log
 

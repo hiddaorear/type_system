@@ -14,3 +14,5 @@
 - [泛型](./TypeScript/generic.md)
 
 - [类型断言](./TypeScript/type_assertion.md)
+
+- [函数重载](./TypeScript/function_overloading.md)
