@@ -202,6 +202,8 @@ const isString = (s: any): s is string => {
 
 ```
 
+TODO 使用了`is`怎么声明函数返回类型？
+
 或者使用 discriminated union(模拟模式匹配)的技巧。当然，这个办法代码多了，约束也更多。
 
 ``` TypeScript

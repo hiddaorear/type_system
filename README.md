@@ -16,3 +16,5 @@
 - [类型断言](./TypeScript/type_assertion.md)
 
 - [函数重载](./TypeScript/function_overloading.md)
+
+- [异常](./TypeScript/Exception.md)
